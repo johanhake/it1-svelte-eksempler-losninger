@@ -38,8 +38,8 @@
     ];
 </script>
 
-<h1>Hva sier {navn}?</h1>
-<Success {navn} />
+<h2>Hva sier {navn}?</h2>
+<Success />
 
 <h3>Bok-tabell</h3>
 <table>
@@ -54,7 +54,7 @@
 </table>
 
 <style>
-    h1 {
+    h2 {
         color: red;
     }
 </style>

@@ -25,7 +25,7 @@
             isbn: 9788202309596,
             forfatter: "Vigdis Hjort",
             forlag: "Cappelen Damm",
-            tittel: "Sommer",
+            tittel: "Hjulskift",
             utgitt: 2007,
         },
         {

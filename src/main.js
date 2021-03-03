@@ -13,7 +13,10 @@
 // import App from './løsningsforslag/Oppgaver-13-14.svelte';
 // import App from './løsningsforslag/Oppgave-15.svelte';
 // import App from './løsningsforslag/Oppgave-16.svelte';
-import App from './løsningsforslag/Oppgave-17.svelte';
+// import App from './løsningsforslag/Oppgave-17.svelte';
+// import App from './løsningsforslag/Oppgave-18.svelte';
+import App from './løsningsforslag/Oppgave-19.svelte';
+// import App from './løsningsforslag/Oppgave-20.svelte';
 
 const app = new App({
 	target: document.body,

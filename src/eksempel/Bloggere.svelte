@@ -10,6 +10,21 @@
 	let navn = ""
 	let følgere = ""
 
+	// Tom liste med bloggere
+	let bloggere = [];
+
+	/*
+	// Henter data fra firestore når siden lastes
+	bloggereDB.get().then(function(snapshot){
+		bloggere = snapshot.docs;
+	});
+	*/
+
+	// Henter data fra firestore når noe endrer seg
+	bloggereDB.orderBy("følgere","desc").onSnapshot(function(snapshot){
+		bloggere = snapshot.docs;
+	});
+
 	// Funksjon: Kode som er lagret og kjøres når den kalles.
 	function sendinnBlogger() {
 		console.log(navn, følgere);
@@ -50,4 +65,9 @@
 	</label>
 	<button>Registrer</button>
 </form>
-
+<h2>Bloggere</h2>
+<ol>
+    {#each bloggere as blogger}
+		<li>{blogger.data().navn}:{blogger.data().følgere}</li>
+	{/each}
+</ol>

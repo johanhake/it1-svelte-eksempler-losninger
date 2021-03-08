@@ -1,5 +1,5 @@
 <script>
-	import Blogger from "./BloggerFasit.svelte";
+	import Blogger from "./Blogger.svelte";
 
 	// Henter referansen til din database på firestore
 	// Merk at vi her må gå opp en mappe ved å bruke ../ forran firebase.js.

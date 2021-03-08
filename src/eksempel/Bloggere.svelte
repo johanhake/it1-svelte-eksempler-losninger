@@ -1,8 +1,9 @@
 <script>
+	import Blogger from "./BloggerFasit.svelte";
+
 	// Henter referansen til din database på firestore
 	// Merk at vi her må gå opp en mappe ved å bruke ../ forran firebase.js.
 	import { db } from "../firebase.js";
-
 
 	// Referanse til blogger-collectionen på firestore!
 	let bloggereDB = db.collection("bloggere");
@@ -68,6 +69,9 @@
 <h2>Bloggere</h2>
 <ol>
     {#each bloggere as blogger}
-		<li>{blogger.data().navn}:{blogger.data().følgere}</li>
+	<Blogger navn={blogger.data().navn}
+			 følgere={blogger.data().følgere}
+			 id={blogger.id}
+			 bloggereDB={bloggereDB}/>
 	{/each}
 </ol>

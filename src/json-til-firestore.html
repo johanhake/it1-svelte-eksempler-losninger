@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Intro firebase</title>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-firestore.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            // Legg in din firestore config her.
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+</head>
+
+<body>
+    <script>
+        // Hvis JSON filen er lokal må html filen åpnes i en lokal server.
+
+        // Inputt variabler
+        const JSON_FILNAVN = "nettbutikk.json";
+
+        // Gjennbruk egenskapsnavn i JSON fil som primærnøkler i firestore
+        const GJENBRUK_ID = false;
+
+        // Sletter alle data i tilsvarende collection fra firestore før
+        // data blir lagt inn.
+        const SLETT_FIRESTORE = true;
+
+        // Henter databasen fra firestore
+        const db = firebase.firestore();
+
+        // Sletter varer i en hel collection
+        async function slettCollection(collectionNavn) {
+
+            // Henter referanse til collection
+            const collection = db.collection(collectionNavn);
+
+            // Henter liste over alle documentene
+            const alleDocs = await collection.get();
+            for (let doc of alleDocs.docs) {
+                console.log(doc);
+
+                // Sletter documentet
+                await collection.doc(doc.id).delete();
+            }
+        }
+
+        // Funksjon som legger inn data fra JSON-fil til firestore
+        async function jsonTilFirestore() {
+
+            console.log("Åpner JSON-fil", JSON_FILNAVN);
+            const jsonFil = await fetch(JSON_FILNAVN);
+            console.log(jsonFil);
+            const dataFil = await jsonFil.json();
+
+            // Antar at egenskapsnavn i JSON-filen er navn på collectioner
+            for (const collectionNavn in dataFil) {
+                const collectionData = dataFil[collectionNavn];
+                console.log("Fant collection:", collectionNavn);
+
+                // Hvis slette collection på firestore
+                if (SLETT_FIRESTORE) {
+                    console.log("Sletter collectionen:", collectionNavn)
+                    await slettCollection(collectionNavn);
+                }
+
+                // Går igjennom alle objektene i en collection og legger til
+                // de på firestore
+                const collection = db.collection(collectionNavn);
+                for (const docId in collectionData) {
+                    console.log("Legger til:", docId, collectionData[docId]);
+                    if (GJENBRUK_ID) {
+                        collection.doc(docId).set(collectionData[docId]);
+                    } else {
+                        collection.add(collectionData[docId]);
+                    }
+                }
+            }
+        }
+
+        // Kjører konverteringsfunksjonen
+        jsonTilFirestore();
+
+    </script>
+
+</body>
+
+</html>

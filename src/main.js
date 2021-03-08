@@ -4,7 +4,7 @@
 // import App from './eksempel/BindeVerdierFraInput.svelte';
 // import App from './eksempel/If-TesterLøkker.svelte';
 // import App from './eksempel/KomponenterMedProps.svelte';
-// import App from './eksempel/Bloggere.svelte';
+import App from './eksempel/Bloggere.svelte';
 
 // import App from './løsningsforslag/Oppgaver-1-4.svelte';
 // import App from './løsningsforslag/Oppgaver-5-9.svelte';
@@ -15,7 +15,7 @@
 // import App from './løsningsforslag/Oppgave-16.svelte';
 // import App from './løsningsforslag/Oppgave-17.svelte';
 // import App from './løsningsforslag/Oppgave-18.svelte';
-import App from './løsningsforslag/Oppgave-19.svelte';
+// import App from './løsningsforslag/Oppgave-19.svelte';
 // import App from './løsningsforslag/Oppgave-20.svelte';
 
 const app = new App({

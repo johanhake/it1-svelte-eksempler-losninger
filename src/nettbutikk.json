@@ -1,0 +1,95 @@
+{
+  "nettbutikk": {
+    "-L6n0KKAwzPWKQ25paE_": {
+      "bilde": "bukse_0000.jpg",
+      "navn": "Hullete",
+      "plagg": "bukse",
+      "pris": 490,
+      "type": "Olabukse"
+    },
+    "-L6n0KKEdRAxmb2M9Wqf": {
+      "bilde": "bukse_0001.jpg",
+      "navn": "Snasen",
+      "plagg": "bukse",
+      "pris": 580,
+      "type": "Finbukse"
+    },
+    "-L6n0KKF7-XG0UtEk1CH": {
+      "bilde": "bukse_0002.jpg",
+      "navn": "Strechy",
+      "plagg": "bukse",
+      "pris": 640,
+      "type": "Olebukse"
+    },
+    "-L6n0KKG1BYi4n9Wfk5y": {
+      "bilde": "bukse_0003.jpg",
+      "navn": "Straight",
+      "plagg": "bukse",
+      "pris": 530,
+      "type": "Finbukse"
+    },
+    "-L6n0KKG1BYi4n9Wfk5z": {
+      "bilde": "skjorte_0003.jpg",
+      "navn": "Stripete",
+      "plagg": "skjorte",
+      "pris": 380,
+      "type": "Hverdags"
+    },
+    "-L6n0KKG1BYi4n9Wfk6-": {
+      "bilde": "bukse_0004.jpg",
+      "navn": "Lommerusk",
+      "plagg": "bukse",
+      "pris": 280,
+      "type": "Olabukse"
+    },
+    "-L6n0KKG1BYi4n9Wfk60": {
+      "bilde": "bukse_0005.jpg",
+      "navn": "Hullete 2",
+      "plagg": "bukse",
+      "pris": 540,
+      "type": "Olabukse"
+    },
+    "-L6n0KKHfgIXVnyqPB3j": {
+      "bilde": "bukse_0006.jpg",
+      "navn": "Trendy",
+      "plagg": "bukse",
+      "pris": 740,
+      "type": "Finbukse"
+    },
+    "-L6n0KKHfgIXVnyqPB3k": {
+      "bilde": "skjorte_0002.jpg",
+      "navn": "Vit",
+      "plagg": "skjorte",
+      "pris": 350,
+      "type": "Tennis"
+    },
+    "-L6n0KKIQCqD-QPWlaUg": {
+      "bilde": "bukse_0007.jpg",
+      "navn": "Fargete",
+      "plagg": "bukse",
+      "pris": 440,
+      "type": "Olabukse"
+    },
+    "-L6n0KKIQCqD-QPWlaUh": {
+      "bilde": "bukse_0008.jpg",
+      "navn": "Brettet",
+      "plagg": "bukse",
+      "pris": 630,
+      "type": "Finbukse"
+    },
+    "-L6n0KKJbTU1wYPrLiXe": {
+      "bilde": "bukse_0009.jpg",
+      "navn": "Komfort",
+      "plagg": "bukse",
+      "pris": 840,
+      "type": "Finbukse"
+    },
+    "-L6n0KKKtIb_NTd8yzXt": {
+      "bilde": "skjorte_0001.jpg",
+      "navn": "Straight",
+      "plagg": "skjorte",
+      "pris": 450,
+      "type": "Finskjorte"
+    }
+  }
+}

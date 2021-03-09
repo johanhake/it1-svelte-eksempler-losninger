@@ -4,7 +4,8 @@
 // import App from './eksempel/BindeVerdierFraInput.svelte';
 // import App from './eksempel/If-TesterLøkker.svelte';
 // import App from './eksempel/KomponenterMedProps.svelte';
-import App from './eksempel/Bloggere.svelte';
+// import App from './eksempel/Bloggere.svelte';
+import App from './eksempel/Nettbutikk.svelte';
 
 // import App from './løsningsforslag/Oppgaver-1-4.svelte';
 // import App from './løsningsforslag/Oppgaver-5-9.svelte';

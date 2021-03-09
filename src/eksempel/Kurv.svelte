@@ -14,7 +14,7 @@
 	let antall = "";
 	let pris = ""
 
-	// Henter vare med en gitt primærnøkkel
+	// Bruker primærnøkkelen til kurvVaren til å hente ut navn og type
 	varerDB.doc(kurvVare.id).get().then(function(doc){
 		// Fortsett her
 		console.log("Henter vare:", navn, kurvVare.id)

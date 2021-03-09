@@ -20,7 +20,7 @@
 	// Viser handlekurven
 	let viserKurv = false;
 
-	// henter varene første gangen
+	// Henter varene første gangen
 	varerDB.get().then(function (snapshot) {
 		// Fortsett her
 	});

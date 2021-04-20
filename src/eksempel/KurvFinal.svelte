@@ -16,10 +16,9 @@
 
 	// Bruker primærnøkkelen til kurvVaren til å hente ut navn og type
 	varerDB.doc(kurvVare.id).get().then(function(doc){
-		// Fortsett her
-		console.log("Henter vare:", navn, kurvVare.id);
 		navn = doc.data().navn;
 		type = doc.data().type;
+		console.log("Henter vare:", navn, kurvVare.id);
 	});
 
 </script>
@@ -29,3 +28,4 @@
 	{navn}
 </article>
 <article><i>{antall}x{pris} kr</i></article>
+

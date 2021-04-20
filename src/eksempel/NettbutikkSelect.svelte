@@ -17,8 +17,42 @@
 	// Variabel for total pris
 	let totalPris = 0;
 
+	// Variabel for visning av pris
+	let visMaksPris = 2600;
+
 	// Viser handlekurven
 	let viserKurv = false;
+
+	// Variabel for hvilket plagg som skal vises
+	let visPlagg = "alle";
+
+	// Reactiv kode som kjøres hver gang visPlagg endrer seg.
+	// Les mer om bruk av $ i Svelte på: https://svelte.dev/tutorial/reactive-statements
+	// Hvis du ikke vill ha med pris-sorteringen fjernes den!
+	// visPlagg kan ha verdien "alle", "skjorte" eller "bukse"
+	$: if (visPlagg === "alle") { // Sjekker først om visPlagg er lik "alle"
+		viserKurv = false;
+
+		// Henter alle varene
+		varerDB
+			.where("pris", "<", visMaksPris)
+			.get()
+			.then(function (snapshot) {
+				varer = snapshot.docs;
+			});
+		// Hvis ikke visPlagg er "alle" er det enten "skjorte" eller "bukse"
+	} else {
+		viserKurv = false;
+
+		// Henter alle varene
+		varerDB
+			.where("pris", "<", visMaksPris)
+			.where("plagg", "==", visPlagg)
+			.get()
+			.then(function (snapshot) {
+				varer = snapshot.docs;
+			});
+	}
 
 	// Henter varene første gangen
 	varerDB.get().then(function (snapshot) {
@@ -29,56 +63,22 @@
 	handlekurvDB.onSnapshot(function (snapshot) {
 		handlekurv = snapshot.docs;
 		totalPris = 0;
-		for(let vare of handlekurv){
-			totalPris = totalPris + vare.data().pris*vare.data().antall;
+		for (let vare of handlekurv) {
+			totalPris = totalPris + vare.data().pris * vare.data().antall;
 		}
 	});
-
-	// Viser alle varene
-	function visAlleVarer() {
-		console.log("vis alle varer");
-		viserKurv = false;
-
-		// Henter alle varene
-		varerDB.get().then(function (snapshot) {
-			varer = snapshot.docs;
-		});
-	}
-
-	// Viser bare bukser
-	function visBukser() {
-		console.log("vis bukser");
-		viserKurv = false;
-
-		// Henter alle buksene
-		varerDB.where("plagg", "==", "bukse").get().then(function (snapshot) {
-			varer = snapshot.docs;
-		});
-	}
-
-	// Viser bare skjorter
-	function visSkjorter() {
-		console.log("vis skjorter");
-		viserKurv = false;
-
-		// Henter alle skjorte
-		varerDB.where("plagg", "==", "skjorte").get().then(function (snapshot) {
-			varer = snapshot.docs;
-		});
-	}
 
 	// Viser handlekurven
 	function visKurv() {
 		console.log("vis kurv");
 		viserKurv = true;
-
 	}
 
 	// Tømmer handlekurven
 	function tomKurv() {
 		console.log("tøm handlekurv");
 
-		for(let vare of handlekurv){
+		for (let vare of handlekurv) {
 			handlekurvDB.doc(vare.id).delete();
 		}
 	}
@@ -90,11 +90,22 @@
 />
 <header>
 	<nav>
-		<button class="button" on:click={visAlleVarer}>Alle varer</button>
-		<button class="button success" on:click={visBukser}>Bukser</button>
-		<button class="button" on:click={visSkjorter}>Skjorter</button>
+		<select bind:value={visPlagg}>
+			<option value="alle">Vis alle</option>
+			<option value="skjorte">Vis Skjorter</option>
+			<option value="bukse">Vis Bukser</option>
+		</select>
 		<button class="button success" on:click={visKurv}>Handlekurv</button>
 		<button class="button warning" on:click={tomKurv}>Tøm handlekurv</button
+		>
+		<label
+			><input
+				type="range"
+				min="100"
+				max="2600"
+				step="100"
+				bind:value={visMaksPris}
+			/>{visMaksPris} kr</label
 		>
 	</nav>
 </header>
@@ -103,7 +114,7 @@
 		<h3>Handlekurv</h3>
 		<!-- Går igjennom alle varene i handlekurven -->
 		{#each handlekurv as kurvVare}
-			<Kurv kurvVare={kurvVare}/>
+			<Kurv {kurvVare} />
 		{/each}
 
 		<article><b>Total pris:</b></article>

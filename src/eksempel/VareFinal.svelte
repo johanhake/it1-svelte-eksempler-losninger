@@ -14,22 +14,15 @@
 
 	// Funksjon for å legge i handlekurven
 	function leggIHandlekurv() {
-		// Fortsett her
-		console.log("Legger i handlevogn:", vare.data().navn)
-
-		// Lager et nytt objekt i handlekurvdatabasen
 		handlekurvDB.doc(vare.id).set({
 			antall: antall,
-			pris: vare.data().pris
+			pris: vare.data().pris,
 		});
-
-		antall=0;
-
+		antall = 0;
 	}
 </script>
 
 <article>
-
 	<img src="bilder/{vare.data().bilde}" alt="" />
 	<h6>{vare.data().type} {vare.data().navn} <i>{vare.data().pris} kr</i></h6>
 	<form on:submit|preventDefault={leggIHandlekurv}>

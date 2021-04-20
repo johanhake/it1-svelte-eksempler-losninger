@@ -1,6 +1,7 @@
 <script>
-	import Vare from "./Vare.svelte";
+	import Vare from "./VareMerInfo.svelte";
 	import Kurv from "./Kurv.svelte";
+	import EnkeltVare from "./EnkeltVare.svelte"
 
 	// Henter referansen til din database på firestore
 	// Merk at vi her må gå opp en mappe ved å bruke ../ forran firebase.js.
@@ -20,6 +21,9 @@
 	// Viser handlekurven
 	let viserKurv = false;
 
+	// Viser enkeltvare
+	let merInfo = "";
+
 	// Henter varene første gangen
 	varerDB.get().then(function (snapshot) {
 		varer = snapshot.docs;
@@ -38,6 +42,7 @@
 	function visAlleVarer() {
 		console.log("vis alle varer");
 		viserKurv = false;
+		merInfo = "";
 
 		// Henter alle varene
 		varerDB.get().then(function (snapshot) {
@@ -49,9 +54,13 @@
 	function visBukser() {
 		console.log("vis bukser");
 		viserKurv = false;
+		merInfo = "";
 
 		// Henter alle buksene
-		varerDB.where("plagg", "==", "bukse").get().then(function (snapshot) {
+		varerDB
+		    .where("plagg", "==", "bukse")
+			.get()
+			.then(function (snapshot) {
 			varer = snapshot.docs;
 		});
 	}
@@ -60,6 +69,7 @@
 	function visSkjorter() {
 		console.log("vis skjorter");
 		viserKurv = false;
+		merInfo = "";
 
 		// Henter alle skjorte
 		varerDB.where("plagg", "==", "skjorte").get().then(function (snapshot) {
@@ -71,6 +81,7 @@
 	function visKurv() {
 		console.log("vis kurv");
 		viserKurv = true;
+		merInfo = "";
 
 	}
 
@@ -109,13 +120,15 @@
 		<article><b>Total pris:</b></article>
 		<article><b>{totalPris} kr</b></article>
 	</sidebar>
-{:else}
+{:else if merInfo == ""}
 	<main>
 		<!-- Går igjennom alle varene i listen varer-->
 		{#each varer as vare}
-			<Vare {vare} />
+			<Vare bind:merInfo={merInfo} {vare} />
 		{/each}
 	</main>
+{:else}
+	<EnkeltVare bind:merInfo={merInfo} />
 {/if}
 
 <style>

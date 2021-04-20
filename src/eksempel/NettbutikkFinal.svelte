@@ -1,6 +1,7 @@
 <script>
-	import Vare from "./Vare.svelte";
-	import Kurv from "./Kurv.svelte";
+	// Importerer Vare-komponenten
+	import Vare from "./VareFinal.svelte";
+	import Kurv from "./KurvFinal.svelte";
 
 	// Henter referansen til din database på firestore
 	// Merk at vi her må gå opp en mappe ved å bruke ../ forran firebase.js.
@@ -21,16 +22,16 @@
 	let viserKurv = false;
 
 	// Henter varene første gangen
-	varerDB.get().then(function (snapshot) {
+	varerDB.get().then(function(snapshot) {
 		varer = snapshot.docs;
 	});
 
 	// Henter endringer i handlekurven
-	handlekurvDB.onSnapshot(function (snapshot) {
+	handlekurvDB.onSnapshot(function(snapshot){
 		handlekurv = snapshot.docs;
 		totalPris = 0;
-		for(let vare of handlekurv){
-			totalPris = totalPris + vare.data().pris*vare.data().antall;
+		for (let vare of handlekurv){
+			totalPris += vare.data().antall*vare.data().pris;
 		}
 	});
 
@@ -38,8 +39,6 @@
 	function visAlleVarer() {
 		console.log("vis alle varer");
 		viserKurv = false;
-
-		// Henter alle varene
 		varerDB.get().then(function (snapshot) {
 			varer = snapshot.docs;
 		});
@@ -49,35 +48,35 @@
 	function visBukser() {
 		console.log("vis bukser");
 		viserKurv = false;
-
-		// Henter alle buksene
-		varerDB.where("plagg", "==", "bukse").get().then(function (snapshot) {
-			varer = snapshot.docs;
-		});
+		varerDB
+			.where("plagg", "==", "bukse")
+			.get()
+			.then(function (snapshot) {
+				varer = snapshot.docs;
+			});
 	}
 
 	// Viser bare skjorter
 	function visSkjorter() {
 		console.log("vis skjorter");
 		viserKurv = false;
-
-		// Henter alle skjorte
-		varerDB.where("plagg", "==", "skjorte").get().then(function (snapshot) {
-			varer = snapshot.docs;
-		});
+		varerDB
+			.where("plagg", "==", "skjorte")
+			.get()
+			.then(function (snapshot) {
+				varer = snapshot.docs;
+			});
 	}
 
 	// Viser handlekurven
 	function visKurv() {
 		console.log("vis kurv");
 		viserKurv = true;
-
 	}
 
 	// Tømmer handlekurven
 	function tomKurv() {
 		console.log("tøm handlekurv");
-
 		for(let vare of handlekurv){
 			handlekurvDB.doc(vare.id).delete();
 		}
@@ -101,19 +100,16 @@
 {#if viserKurv}
 	<sidebar id="txtHandlekurv">
 		<h3>Handlekurv</h3>
-		<!-- Går igjennom alle varene i handlekurven -->
 		{#each handlekurv as kurvVare}
 			<Kurv kurvVare={kurvVare}/>
 		{/each}
-
-		<article><b>Total pris:</b></article>
-		<article><b>{totalPris} kr</b></article>
+		<article><b>Total pris:</b></article><article><b>{totalPris} kr</b></article>
 	</sidebar>
 {:else}
 	<main>
 		<!-- Går igjennom alle varene i listen varer-->
 		{#each varer as vare}
-			<Vare {vare} />
+			<Vare vare={vare} />
 		{/each}
 	</main>
 {/if}

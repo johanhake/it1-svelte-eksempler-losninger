@@ -5,9 +5,16 @@
 
 	// Handlekurv collectionen
 	let handlekurvDB = db.collection("handlekurv");
+	let varerDB = db.collection("varer");
 
 	// Props
-	export let vare = {};
+	export let merInfo = "";
+
+	// Vare
+	let vare = "";
+	varerDB.doc(merInfo).get().then(function(doc){
+		vare = doc;
+	});
 
 	// Antall variabel
 	let antall = 0;
@@ -24,22 +31,32 @@
 		});
 
 		antall=0;
-
 	}
+
+	function resetMerInfo(){
+		merInfo = "";
+	}
+
 </script>
 
-<article>
-
+{#if vare}
+<main>
 	<img src="bilder/{vare.data().bilde}" alt="" />
 	<h6>{vare.data().type} {vare.data().navn} <i>{vare.data().pris} kr</i></h6>
 	<form on:submit|preventDefault={leggIHandlekurv}>
 		<input type="number" bind:value={antall} min="1" />
 		<button class="button">Legg i Handlekurv</button>
+		<button type="button" class="button warning" on:click={resetMerInfo}>Tilbake</button>
 	</form>
-</article>
-
+</main>
+{:else}
+<main>
+	...henter...
+</main>
+{/if}
 <style>
-	article img {
+	main img {
 		width: 100%;
 	}
+
 </style>

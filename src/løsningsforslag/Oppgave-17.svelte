@@ -41,7 +41,7 @@
 	<label>Navn:
 		<input type="text" bind:value={navn} placeholder="Navn" required />
 	</label>
-	<label>Følgere:
+	<label>Melding:
 		<input
 			type="text"
 			bind:value={melding}
